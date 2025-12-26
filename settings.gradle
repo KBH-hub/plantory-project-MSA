@@ -1,0 +1,7 @@
+rootProject.name = 'plantory-project-MSA'
+//include 'plantory-config-server'
+//include 'plantory-eureka-server'
+//include 'plantory-gateway'
+
+//include 'plantory-member-service'
+//include 'plantory-profile-service'
