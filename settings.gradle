@@ -1,9 +1,8 @@
-rootProject.name = 'plantory-project-MSA'
-//include 'plantory-config-server'
-//include 'plantory-eureka-server'
-//include 'plantory-gateway'
+rootProject.name = "plantory-project-MSA"
 
-include 'member-service'
-include 'admin-service'
-include 'community-service'
-include 'plant-service'
+include(
+        "community-service",
+        "plant-service",
+        "admin-service",
+        "member-service",
+)

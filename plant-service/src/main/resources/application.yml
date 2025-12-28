@@ -2,9 +2,16 @@ spring:
   application:
     name: plant-service
   profiles:
-    active: prod
+    default: local   # 로컬 기본값 (선택이지만 추천)
   config:
-    import: "optional:configserver:http://config-server:9888"
+    import: "optional:configserver:"   # local에서는 서버 URI가 없어도 통과
 
 server:
   port: 9004
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+    import: "optional:configserver:http://config-server:9888"

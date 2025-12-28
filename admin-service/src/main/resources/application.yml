@@ -2,9 +2,17 @@ spring:
   application:
     name: admin-service
   profiles:
-    active: prod
+    default: local
   config:
-    import: "optional:configserver:http://config-server:9888"
+    import: "optional:configserver:"   # local에서는 서버 URI가 없어도 통과
 
 server:
   port: 9003
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+    import: "optional:configserver:http://config-server:9888"
