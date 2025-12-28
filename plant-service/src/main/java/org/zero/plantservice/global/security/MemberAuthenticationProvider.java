@@ -1,0 +1,77 @@
+package org.zero.plantservice.global.security;
+
+import com.zero.plantoryprojectbe.member.Member;
+import com.zero.plantoryprojectbe.member.MemberRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.LockedException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
+
+@Slf4j
+@Component
+@RequiredArgsConstructor
+public class MemberAuthenticationProvider implements AuthenticationProvider {
+
+    private final MemberDetailService userDetailsService;
+    private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    @Override
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+
+        String username = authentication.getName();
+        String rawPassword = authentication.getCredentials().toString();
+
+        MemberPrincipal principal;
+        try {
+            principal = (MemberPrincipal) userDetailsService.loadUserByUsername(username);
+        } catch (UsernameNotFoundException e) {
+            throw new BadCredentialsException("아이디 또는 비밀번호가 올바르지 않습니다.");
+        }
+
+        if (!passwordEncoder.matches(rawPassword, principal.getPassword())) {
+            throw new BadCredentialsException("아이디 또는 비밀번호가 올바르지 않습니다.");
+        }
+
+        Member member = memberRepository.findById(principal.getMemberId())
+                .orElseThrow(() -> new BadCredentialsException("아이디 또는 비밀번호가 올바르지 않습니다."));
+
+        LocalDateTime stopDay = member.getStopDay();
+        if (stopDay != null) {
+            LocalDateTime now = LocalDateTime.now();
+
+            if (stopDay.isAfter(now)) {
+                if (stopDay.toLocalDate().isEqual(now.toLocalDate())) {
+                    throw new LockedException("오늘까지 정지입니다.");
+                }
+                throw new LockedException(stopDay.toLocalDate() + "까지 정지입니다.");
+            }
+
+
+            if (stopDay.isBefore(now) || stopDay.isEqual(now)) {
+                member.resetStopDay();
+                memberRepository.save(member);
+            }
+        }
+
+        return new UsernamePasswordAuthenticationToken(
+                principal,
+                null,
+                principal.getAuthorities()
+        );
+    }
+
+    @Override
+    public boolean supports(Class<?> authentication) {
+        return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);
+    }
+}

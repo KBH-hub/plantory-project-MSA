@@ -1,30 +1,27 @@
 package org.zero.plantservice;
 
-import com.zero.plantoryprojectbe.global.security.MemberPrincipal;
-import com.zero.plantoryprojectbe.image.dto.ImageDTO;
-import com.zero.plantoryprojectbe.plantingCalendar.dto.DiaryRequest;
-import com.zero.plantoryprojectbe.plantingCalendar.dto.DiaryResponse;
-import com.zero.plantoryprojectbe.plantingCalendar.dto.MyPlantDiaryResponse;
-import com.zero.plantoryprojectbe.plantingCalendar.dto.PlantingCalendarResponse;
-import com.zero.plantoryprojectbe.plantingCalendar.service.PlantingCalenderService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.zero.plantservice.dto.*;
+import org.zero.plantservice.global.security.MemberPrincipal;
+import org.zero.plantservice.service.PlantingCalenderService;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
 @RequestMapping("/api/plantingCalender")
@@ -49,7 +46,7 @@ public class PlantingCalenderRestController {
             @Parameter(description = "조회 종료일", example = "2025-12-31T23:59:59")
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate
     ) {
-        Long memberId = principal.getMemberId();
+        Long memberId = principal.memberId();
         return plantingCalenderService.getDiaryCalendar(memberId, startDate, endDate);
     }
 
@@ -68,7 +65,7 @@ public class PlantingCalenderRestController {
             @Parameter(description = "조회 종료일", example = "2025-12-31T23:59:59")
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate
     ) {
-        Long memberId = principal.getMemberId();
+        Long memberId = principal.memberId();
         return plantingCalenderService.getWateringCalendar(memberId, startDate, endDate);
     }
 
@@ -115,7 +112,7 @@ public class PlantingCalenderRestController {
             @RequestParam Long myplantId,
             @AuthenticationPrincipal MemberPrincipal principal
     ) {
-        Long memberId = principal.getMemberId();
+        Long memberId = principal.memberId();
         int result = plantingCalenderService.removePlantWatering(myplantId, memberId);
         if (result == 1) {
             return ResponseEntity.status(200).body(Map.of("message", "watering delete success"));
@@ -178,7 +175,7 @@ public class PlantingCalenderRestController {
             @RequestPart(value = "files", required = false) List<MultipartFile> files,
             @AuthenticationPrincipal MemberPrincipal principal
     ) throws IOException {
-        Long memberId = principal.getMemberId();
+        Long memberId = principal.memberId();
         if (plantingCalenderService.registerDiary(request, files, memberId) == 0)
             return ResponseEntity.status(400).body(Map.of("message", "diary register fail"));
         return ResponseEntity.status(200).body(Map.of("message", "diary create success"));
@@ -195,7 +192,16 @@ public class PlantingCalenderRestController {
     public List<MyPlantDiaryResponse> getMyPlant(
             @AuthenticationPrincipal MemberPrincipal principal
     ) {
-        Long memberId = principal.getMemberId();
+        Long memberId = principal.memberId();
         return plantingCalenderService.getMyPlant(memberId);
+    }
+
+    @Mapper
+    public static interface NoticeMapper {
+        List<NoticeDTO> selectNoticesByReceiver(@Param("receiverId") Long receiverId);
+        int insertNotice(NoticeDTO noticeDTO);
+        int updateNoticeReadFlag(Long noticeId);
+        int deleteAllNotice(@Param("receiverId") Long receiverId);
+        int existsTodayWateringNotice(@Param("receiverId") Long receiverId, @Param("targetId") Long targetId);
     }
 }

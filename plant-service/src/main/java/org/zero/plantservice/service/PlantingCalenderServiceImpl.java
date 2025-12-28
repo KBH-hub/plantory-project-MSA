@@ -1,20 +1,17 @@
 package org.zero.plantservice.service;
 
-import com.zero.plantoryprojectbe.global.config.SolapiConfig;
-import com.zero.plantoryprojectbe.image.dto.ImageDTO;
-import com.zero.plantoryprojectbe.global.plantoryEnum.ImageTargetType;
-import com.zero.plantoryprojectbe.notice.NoticeMapper;
-import com.zero.plantoryprojectbe.notice.dto.NoticeDTO;
-import com.zero.plantoryprojectbe.global.plantoryEnum.NoticeTargetType;
-import com.zero.plantoryprojectbe.global.utils.StorageUploader;
-import com.zero.plantoryprojectbe.image.ImageMapper;
-import com.zero.plantoryprojectbe.notice.service.NoticeService;
-import com.zero.plantoryprojectbe.plantingCalendar.PlantingCalendarMapper;
-import com.zero.plantoryprojectbe.plantingCalendar.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import org.zero.plantservice.ImageMapper;
+import org.zero.plantservice.PlantingCalendarMapper;
+import org.zero.plantservice.PlantingCalenderRestController;
+import org.zero.plantservice.dto.*;
+import org.zero.plantservice.global.config.SolapiConfig;
+import org.zero.plantservice.global.plantoryEnum.ImageTargetType;
+import org.zero.plantservice.global.plantoryEnum.NoticeTargetType;
+import org.zero.plantservice.global.utils.StorageUploader;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -33,7 +30,7 @@ public class PlantingCalenderServiceImpl implements PlantingCalenderService {
     private final SMSService smsService;
     private final SolapiConfig solapi;
     private final NoticeService noticeService;
-    private final NoticeMapper noticeMapper;
+    private final PlantingCalenderRestController.NoticeMapper noticeMapper;
 
 
     @Override

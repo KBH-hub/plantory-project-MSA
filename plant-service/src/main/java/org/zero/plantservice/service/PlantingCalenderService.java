@@ -1,11 +1,7 @@
 package org.zero.plantservice.service;
 
-import com.zero.plantoryprojectbe.image.dto.ImageDTO;
-import com.zero.plantoryprojectbe.plantingCalendar.dto.DiaryRequest;
-import com.zero.plantoryprojectbe.plantingCalendar.dto.DiaryResponse;
-import com.zero.plantoryprojectbe.plantingCalendar.dto.MyPlantDiaryResponse;
-import com.zero.plantoryprojectbe.plantingCalendar.dto.PlantingCalendarResponse;
 import org.springframework.web.multipart.MultipartFile;
+import org.zero.plantservice.dto.*;
 
 import java.io.IOException;
 import java.time.LocalDateTime;

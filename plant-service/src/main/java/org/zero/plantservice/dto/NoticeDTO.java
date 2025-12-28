@@ -1,11 +1,11 @@
 package org.zero.plantservice.dto;
 
-import com.zero.plantoryprojectbe.global.plantoryEnum.NoticeTargetType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.zero.plantservice.global.plantoryEnum.NoticeTargetType;
 
 import java.util.Date;
 

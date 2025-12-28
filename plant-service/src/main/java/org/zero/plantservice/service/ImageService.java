@@ -1,8 +1,8 @@
 package org.zero.plantservice.service;
 
-import com.zero.plantoryprojectbe.image.dto.ImageDTO;
-import com.zero.plantoryprojectbe.global.plantoryEnum.ImageTargetType;
 import org.springframework.web.multipart.MultipartFile;
+import org.zero.plantservice.dto.ImageDTO;
+import org.zero.plantservice.global.plantoryEnum.ImageTargetType;
 
 import java.io.IOException;
 import java.util.List;

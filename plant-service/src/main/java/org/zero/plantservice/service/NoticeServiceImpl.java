@@ -1,9 +1,9 @@
 package org.zero.plantservice.service;
 
-import com.zero.plantoryprojectbe.notice.dto.NoticeDTO;
-import com.zero.plantoryprojectbe.notice.NoticeMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.zero.plantservice.PlantingCalenderRestController;
+import org.zero.plantservice.dto.NoticeDTO;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class NoticeServiceImpl implements NoticeService {
 
-    private final NoticeMapper noticeMapper;
+    private final PlantingCalenderRestController.NoticeMapper noticeMapper;
 
 
     @Override

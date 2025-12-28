@@ -1,25 +1,23 @@
 package org.zero.plantservice;
 
-import com.zero.plantoryprojectbe.global.security.MemberPrincipal;
-import com.zero.plantoryprojectbe.myPlant.dto.MyPlantRequest;
-import com.zero.plantoryprojectbe.myPlant.dto.MyPlantResponse;
-import com.zero.plantoryprojectbe.myPlant.service.MyPlantService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.zero.plantservice.dto.MyPlantRequest;
+import org.zero.plantservice.dto.MyPlantResponse;
+import org.zero.plantservice.global.security.MemberPrincipal;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
 @RequestMapping("/api/myPlant")
@@ -27,7 +25,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 @Tag(name = "MyPlant", description = "내 식물 관리 API")
 public class MyplantRestController {
 
-    private final MyPlantService myPlantService;
+    private final org.zero.plantservice.service.MyPlantService myPlantService;
 
     @Operation(summary = "내 식물 목록 조회", description = "로그인한 사용자의 내 식물 목록을 조회합니다.")
     @SecurityRequirement(name = "bearerAuth")
@@ -46,7 +44,7 @@ public class MyplantRestController {
             @Parameter(description = "조회 시작 위치", example = "0")
             @RequestParam Integer offset
     ) {
-        Long memberId = principal.getMemberId();
+        Long memberId = principal.memberId();
         return myPlantService.getMyPlantList(memberId, name, limit, offset);
     }
 
@@ -66,7 +64,7 @@ public class MyplantRestController {
             @RequestParam(value = "file", required = false) MultipartFile file,
             @AuthenticationPrincipal MemberPrincipal principal
     ) throws IOException {
-        Long memberId = principal.getMemberId();
+        Long memberId = principal.memberId();
         request.setMemberId(memberId);
         if (myPlantService.registerMyPlant(request, file, memberId) == 0)
             return ResponseEntity.status(400).body(Map.of("message", "myPlant regist fail"));
@@ -91,7 +89,7 @@ public class MyplantRestController {
             @RequestParam(name = "file", required = false) MultipartFile file,
             @AuthenticationPrincipal MemberPrincipal principal
     ) throws IOException {
-        Long memberId = principal.getMemberId();
+        Long memberId = principal.memberId();
         request.setMemberId(memberId);
         if (myPlantService.updateMyPlant(request, delFile, file, memberId) == 0)
             return ResponseEntity.status(400).body(Map.of("message", "myPlant regist fail"));

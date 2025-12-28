@@ -1,7 +1,7 @@
 package org.zero.plantservice.service;
 
 
-import com.zero.plantoryprojectbe.plantingCalendar.dto.SMSRequest;
+import org.zero.plantservice.dto.SMSRequest;
 
 import java.util.Map;
 

@@ -1,9 +1,6 @@
 package org.zero.plantservice.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zero.plantoryprojectbe.global.config.SolapiConfig;
-import com.zero.plantoryprojectbe.plantingCalendar.SolapiAuth;
-import com.zero.plantoryprojectbe.plantingCalendar.dto.SMSRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -11,6 +8,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.zero.plantservice.SolapiAuth;
+import org.zero.plantservice.dto.SMSRequest;
+import org.zero.plantservice.global.config.SolapiConfig;
 
 import java.util.Map;
 

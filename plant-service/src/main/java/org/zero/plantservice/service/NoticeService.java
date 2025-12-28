@@ -1,6 +1,6 @@
 package org.zero.plantservice.service;
 
-import com.zero.plantoryprojectbe.notice.dto.NoticeDTO;
+import org.zero.plantservice.dto.NoticeDTO;
 
 import java.util.List;
 

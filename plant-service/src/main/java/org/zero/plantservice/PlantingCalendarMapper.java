@@ -1,8 +1,8 @@
 package org.zero.plantservice;
 
-import com.zero.plantoryprojectbe.plantingCalendar.dto.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.zero.plantservice.dto.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
