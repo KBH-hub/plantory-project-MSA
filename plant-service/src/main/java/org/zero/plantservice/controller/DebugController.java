@@ -3,7 +3,7 @@ package org.zero.plantservice.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.zero.plantservice.config.FeatureToggle;
+import org.zero.communityservice.config.FeatureToggle;
 
 @RestController
 @RequiredArgsConstructor
