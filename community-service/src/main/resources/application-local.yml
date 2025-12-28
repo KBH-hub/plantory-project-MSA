@@ -13,3 +13,9 @@ eureka:
       defaultZone: http://localhost:9761/eureka
   instance:
     prefer-ip-address: true
+
+mybatis:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    map-underscore-to-camel-case: true
+  mapper-locations: classpath:/mappers/**/*.xml

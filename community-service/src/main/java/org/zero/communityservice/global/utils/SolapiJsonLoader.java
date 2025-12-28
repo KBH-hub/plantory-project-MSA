@@ -3,9 +3,9 @@ package org.zero.communityservice.global.utils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zero.plantoryprojectbe.global.config.SolapiConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.zero.communityservice.global.config.SolapiConfig;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
