@@ -11,8 +11,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.zero.memberservice.Member;
-import org.zero.memberservice.MemberRepository;
+import org.zero.memberservice.member.Member;
+import org.zero.memberservice.member.MemberRepository;
 
 import java.time.LocalDateTime;
 
