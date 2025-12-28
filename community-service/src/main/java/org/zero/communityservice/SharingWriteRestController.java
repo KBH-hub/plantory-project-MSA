@@ -49,6 +49,7 @@ public class SharingWriteRestController {
 //    }
 //}
 
+
 //    @Operation(
 //            summary = "나눔 수정",
 //            description = "나눔 게시글을 수정합니다. deletedImageIds는 JSON 배열 문자열입니다. (인증 필요)"
