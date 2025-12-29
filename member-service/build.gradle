@@ -17,8 +17,7 @@ dependencyManagement {
 }
 
 dependencies {
-    //RabbitMQ , Kafka
-//    implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 //    implementation 'org.springframework.cloud:spring-cloud-starter-bus-kafka'
 
     // Web / View
