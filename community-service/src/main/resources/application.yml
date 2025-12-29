@@ -1,17 +1,11 @@
 spring:
   application:
-    name: community-service
-  profiles:
-    default: local   # 로컬 기본값 (선택이지만 추천)
+    name: member-service
   config:
-    import: "optional:configserver:"   # local에서는 서버 URI가 없어도 통과
-
-server:
-  port: 9002
-
----
-spring:
-  config:
-    activate:
-      on-profile: prod
-    import: "optional:configserver:http://config-server:9888"
+    import: "optional:configserver:${CONFIG_SERVER_URL:http://localhost:9888}"
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+        web: DEBUG

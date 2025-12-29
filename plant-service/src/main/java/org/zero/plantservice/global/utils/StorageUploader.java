@@ -6,5 +6,6 @@ import java.io.IOException;
 
 public interface StorageUploader {
     String uploadFile(MultipartFile file) throws IOException;
+
     boolean deleteFile(String fileName);
 }

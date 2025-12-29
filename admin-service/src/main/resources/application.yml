@@ -4,15 +4,25 @@ spring:
   profiles:
     default: local
   config:
-    import: "optional:configserver:"   # local에서는 서버 URI가 없어도 통과
+    import: "optional:configserver:"  # config server를 쓰되, local에선 없어도 부팅 가능
 
 server:
-  port: 9003
-
+  port: 9001
 
 ---
 spring:
   config:
     activate:
       on-profile: prod
-    import: "optional:configserver:http://config-server:9888"
+  cloud:
+    config:
+      uri: http://config-server:9888  # 도커 컴포즈 네트워크에서만 유효
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+  cloud:
+    config:
+      uri: http://localhost:9888      # IntelliJ 로컬 실행용
