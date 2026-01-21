@@ -106,18 +106,17 @@
 
     <select id="selectMyplantsForWindow" parameterType="int"
             resultType="org.zero.plantservice.dto.MyplantSlotBaseResponse">
-        SELECT mp.myplant_id,
+        SELECT
+        mp.myplant_id,
         mp.start_at,
         mp.end_date,
         mp.`interval`,
-        m.phone,
-        m.member_id,
+        mp.member_id,
         mp.name
         FROM myplant mp
-        JOIN member m ON m.member_id = mp.member_id
-        WHERE mp.del_flag   IS NULL
-        AND mp.start_at   IS NOT NULL
-        AND mp.end_date   IS NOT NULL
+        WHERE mp.del_flag IS NULL
+        AND mp.start_at IS NOT NULL
+        AND mp.end_date IS NOT NULL
         AND mp.`interval` IS NOT NULL
         AND mp.start_at &lt;= DATE_ADD(NOW(), INTERVAL 1 DAY)
         AND mp.end_date >= NOW()

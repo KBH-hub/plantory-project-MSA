@@ -39,10 +39,10 @@ public class MemberRestController {
     @Operation(summary = "아이디 사용 가능 여부 확인", description = "회원 아이디(username)의 사용 가능 여부를 확인합니다.")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "조회 성공"), @ApiResponse(responseCode = "400", description = "요청값 오류")
     })
-    @GetMapping("/membername")
+    @GetMapping("/checkMembername")
     public ResponseEntity<Map<String, Boolean>> checkUsername(
             @Parameter(description = "회원 아이디", example = "soo8848")
-            @RequestParam("value") @NotBlank String value
+            @RequestParam("membername") @NotBlank String value
     ) {
         boolean available = memberService.isMembernameAvailable(value.trim());
         return ResponseEntity.ok(Map.of("available", available));
@@ -50,10 +50,10 @@ public class MemberRestController {
 
     @Operation(summary = "닉네임 사용 가능 여부 확인", description = "회원 닉네임의 사용 가능 여부를 확인합니다.")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "조회 성공"), @ApiResponse(responseCode = "400", description = "요청값 오류")})
-    @GetMapping("/nickname")
+    @GetMapping("/checkNickname")
     public ResponseEntity<Map<String, Boolean>> checkNickname(
             @Parameter(description = "닉네임", example = "제육볶음밥")
-            @RequestParam("value") @NotBlank String value
+            @RequestParam("nickname") @NotBlank String value
     ) {
         boolean available = memberService.isNicknameAvailable(value.trim());
         return ResponseEntity.ok(Map.of("available", available));
