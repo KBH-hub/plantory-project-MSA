@@ -15,7 +15,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.zero.plantservice.dto.*;
-import org.zero.plantservice.global.security.MemberPrincipal;
+import org.zero.plantservice.global.security.jwt.MemberPrincipal;
 import org.zero.plantservice.service.PlantingCalenderService;
 
 import java.io.IOException;
@@ -46,7 +46,7 @@ public class PlantingCalenderRestController {
             @Parameter(description = "조회 종료일", example = "2025-12-31T23:59:59")
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate
     ) {
-        Long memberId = principal.memberId();
+        Long memberId = principal.getMemberId();
         return plantingCalenderService.getDiaryCalendar(memberId, startDate, endDate);
     }
 
@@ -65,7 +65,7 @@ public class PlantingCalenderRestController {
             @Parameter(description = "조회 종료일", example = "2025-12-31T23:59:59")
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate
     ) {
-        Long memberId = principal.memberId();
+        Long memberId = principal.getMemberId();
         return plantingCalenderService.getWateringCalendar(memberId, startDate, endDate);
     }
 
@@ -112,7 +112,7 @@ public class PlantingCalenderRestController {
             @RequestParam Long myplantId,
             @AuthenticationPrincipal MemberPrincipal principal
     ) {
-        Long memberId = principal.memberId();
+        Long memberId = principal.getMemberId();
         int result = plantingCalenderService.removePlantWatering(myplantId, memberId);
         if (result == 1) {
             return ResponseEntity.status(200).body(Map.of("message", "watering delete success"));
@@ -175,7 +175,7 @@ public class PlantingCalenderRestController {
             @RequestPart(value = "files", required = false) List<MultipartFile> files,
             @AuthenticationPrincipal MemberPrincipal principal
     ) throws IOException {
-        Long memberId = principal.memberId();
+        Long memberId = principal.getMemberId();
         if (plantingCalenderService.registerDiary(request, files, memberId) == 0)
             return ResponseEntity.status(400).body(Map.of("message", "diary register fail"));
         return ResponseEntity.status(200).body(Map.of("message", "diary create success"));
@@ -192,7 +192,7 @@ public class PlantingCalenderRestController {
     public List<MyPlantDiaryResponse> getMyPlant(
             @AuthenticationPrincipal MemberPrincipal principal
     ) {
-        Long memberId = principal.memberId();
+        Long memberId = principal.getMemberId();
         return plantingCalenderService.getMyPlant(memberId);
     }
 

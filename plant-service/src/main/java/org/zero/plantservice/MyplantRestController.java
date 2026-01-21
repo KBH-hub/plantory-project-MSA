@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.zero.plantservice.dto.MyPlantRequest;
 import org.zero.plantservice.dto.MyPlantResponse;
-import org.zero.plantservice.global.security.MemberPrincipal;
+import org.zero.plantservice.global.security.jwt.MemberPrincipal;
 
 import java.io.IOException;
 import java.util.List;
@@ -44,7 +44,7 @@ public class MyplantRestController {
             @Parameter(description = "조회 시작 위치", example = "0")
             @RequestParam Integer offset
     ) {
-        Long memberId = principal.memberId();
+        Long memberId = principal.getMemberId();
         return myPlantService.getMyPlantList(memberId, name, limit, offset);
     }
 
@@ -64,7 +64,7 @@ public class MyplantRestController {
             @RequestParam(value = "file", required = false) MultipartFile file,
             @AuthenticationPrincipal MemberPrincipal principal
     ) throws IOException {
-        Long memberId = principal.memberId();
+        Long memberId = principal.getMemberId();
         request.setMemberId(memberId);
         if (myPlantService.registerMyPlant(request, file, memberId) == 0)
             return ResponseEntity.status(400).body(Map.of("message", "myPlant regist fail"));
@@ -89,7 +89,7 @@ public class MyplantRestController {
             @RequestParam(name = "file", required = false) MultipartFile file,
             @AuthenticationPrincipal MemberPrincipal principal
     ) throws IOException {
-        Long memberId = principal.memberId();
+        Long memberId = principal.getMemberId();
         request.setMemberId(memberId);
         if (myPlantService.updateMyPlant(request, delFile, file, memberId) == 0)
             return ResponseEntity.status(400).body(Map.of("message", "myPlant regist fail"));

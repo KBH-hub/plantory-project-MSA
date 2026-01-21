@@ -7,11 +7,9 @@ import org.zero.communityservice.sharing.dto.*;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface SharingMapper {
-    SharingDetailBaseRow selectSharingDetailBase(Map<String, Object> params);
 
     List<SharingCardListResponse> selectSharingListByAddressAndKeyword(SharingSearchRequest request);
     int countInterestByMemberId(Long memberId);

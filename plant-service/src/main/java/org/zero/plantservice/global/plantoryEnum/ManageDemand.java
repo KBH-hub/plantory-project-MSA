@@ -8,12 +8,6 @@ public enum ManageDemand {
     ETC("기타");               // 기타(실내)
 
     private final String label;
-
-    ManageDemand(String label) {
-        this.label = label;
-    }
-
-    public String getLabel() {
-        return label;
-    }
+    ManageDemand(String label) { this.label = label; }
+    public String getLabel() { return label; }
 }

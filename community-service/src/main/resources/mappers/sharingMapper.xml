@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.zero.communityservice.SharingMapper">
+<mapper namespace="org.zero.communityservice.sharing.SharingMapper">
 <!--    <select id="selectSharingListByAddressAndKeyword"-->
 <!--            parameterType="org.zero.communityservice.dto.SharingSearchRequest"-->
 <!--            resultType="org.zero.communityservice.dto.SharingCardListResponse">-->
@@ -92,7 +92,7 @@
 <!--    </select>-->
 
     <insert id="insertSharing"
-            parameterType="org.zero.communityservice.dto.SharingRequest"
+            parameterType="org.zero.communityservice.sharing.dto.SharingRequest"
             useGeneratedKeys="true"
             keyProperty="sharingId">
 
@@ -230,7 +230,7 @@
           AND del_flag IS NULL
     </update>
 
-    <update id="deleteComment" parameterType="org.zero.communityservice.dto.CommentRequest">
+    <update id="deleteComment" parameterType="org.zero.communityservice.sharing.dto.CommentRequest">
         UPDATE comment
         SET del_flag = NOW()
         WHERE comment_id = #{commentId}
@@ -248,7 +248,7 @@
     </select>
 
     <update id="updateSharing"
-            parameterType="org.zero.communityservice.dto.SharingRequest">
+            parameterType="org.zero.communityservice.sharing.dto.SharingRequest">
         UPDATE sharing
         SET title            = #{title},
             content          = #{content},

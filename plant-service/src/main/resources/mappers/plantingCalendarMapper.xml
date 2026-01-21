@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zero.plantoryprojectbe.plantingCalendar.PlantingCalendarMapper">
+<mapper namespace="org.zero.plantservice.PlantingCalendarMapper">
 
     <update id="updatePlantWateringCheck" parameterType="Long">
         UPDATE watering
@@ -22,7 +22,7 @@
 
     <select id="selectWateringCalendar"
             parameterType="map"
-            resultType="com.zero.plantoryprojectbe.plantingCalendar.dto.PlantingCalendarResponse">
+            resultType="org.zero.plantservice.dto.PlantingCalendarResponse">
         SELECT
             w.watering_id,
             w.myplant_id,
@@ -42,7 +42,7 @@
 
     <select id="selectDiaryCalendar"
             parameterType="map"
-            resultType="com.zero.plantoryprojectbe.plantingCalendar.dto.PlantingCalendarResponse">
+            resultType="org.zero.plantservice.dto.PlantingCalendarResponse">
         SELECT
             d.diary_id,
             d.myplant_id,
@@ -60,7 +60,7 @@
         ORDER BY d.created_at ASC;
     </select>
 
-    <select id="selectDiaryUpdateInfo" resultType="com.zero.plantoryprojectbe.plantingCalendar.dto.DiaryResponse">
+    <select id="selectDiaryUpdateInfo" resultType="org.zero.plantservice.dto.DiaryResponse">
         SELECT
             d.diary_id,
             d.myplant_id,
@@ -83,7 +83,7 @@
         WHERE diary_id = #{diaryId};
     </update>
 
-    <select id="selectMyPlant" resultType="com.zero.plantoryprojectbe.plantingCalendar.dto.MyPlantDiaryResponse">
+    <select id="selectMyPlant" resultType="org.zero.plantservice.dto.MyPlantDiaryResponse">
         SELECT myplant_id, NAME
         FROM myplant
         WHERE member_id = #{memberId}
@@ -91,7 +91,7 @@
     </select>
 
     <insert id="insertDiary"
-            parameterType="com.zero.plantoryprojectbe.plantingCalendar.dto.DiaryRequest"
+            parameterType="org.zero.plantservice.dto.DiaryRequest"
             useGeneratedKeys="true"
             keyProperty="diaryId"
             keyColumn="diary_id">
@@ -105,7 +105,7 @@
     </delete>
 
     <select id="selectMyplantsForWindow" parameterType="int"
-            resultType="com.zero.plantoryprojectbe.plantingCalendar.dto.MyplantSlotBaseResponse">
+            resultType="org.zero.plantservice.dto.MyplantSlotBaseResponse">
         SELECT mp.myplant_id,
         mp.start_at,
         mp.end_date,

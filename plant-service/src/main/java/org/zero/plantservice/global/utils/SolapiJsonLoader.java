@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.zero.memberservice.global.config.SolapiConfig;
+import org.zero.plantservice.global.config.SolapiConfig;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

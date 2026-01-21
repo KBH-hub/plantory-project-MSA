@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zero.plantoryprojectbe.myPlant.MyPlantMapper">
-    <select id="selectMyPlantList" resultType="com.zero.plantoryprojectbe.myPlant.dto.MyPlantResponse">
+<mapper namespace="org.zero.plantservice.MyPlantMapper">
+    <select id="selectMyPlantList" resultType="org.zero.plantservice.dto.MyPlantResponse">
         SELECT myplant_id,member_id,type,name,start_at,end_date,`interval`,soil,temperature,created_at,
         COUNT(*) OVER() AS total_count
         FROM myplant

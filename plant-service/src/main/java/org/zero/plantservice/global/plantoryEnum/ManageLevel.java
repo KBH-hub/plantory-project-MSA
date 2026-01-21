@@ -9,12 +9,6 @@ public enum ManageLevel {
     ETC("기타");
 
     private final String label;
-
-    ManageLevel(String label) {
-        this.label = label;
-    }
-
-    public String getLabel() {
-        return label;
-    }
+    ManageLevel(String label) { this.label = label; }
+    public String getLabel() { return label; }
 }

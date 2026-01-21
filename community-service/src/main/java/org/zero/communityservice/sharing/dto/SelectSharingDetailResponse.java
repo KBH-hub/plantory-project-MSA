@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.zero.communityservice.image.dto.ImageDTO;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -34,6 +35,7 @@ public class SelectSharingDetailResponse {
 
     private List<ImageDTO> images;
     private boolean interested;
+
 
     private LocalDateTime reviewFlag;
     private LocalDateTime receiverReviewFlag;

@@ -20,5 +20,4 @@ import org.springframework.context.annotation.Configuration;
         in = SecuritySchemeIn.HEADER
 )
 @Configuration
-public class OpenApiConfig {
-}
+public class OpenApiConfig {}

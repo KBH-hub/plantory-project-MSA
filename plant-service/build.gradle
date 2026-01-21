@@ -20,6 +20,8 @@ dependencies {
     //RabbitMQ , Kafka
 //    implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
 //    implementation 'org.springframework.cloud:spring-cloud-starter-bus-kafka'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
 
     // Web / View
     implementation 'org.springframework.boot:spring-boot-starter-web'

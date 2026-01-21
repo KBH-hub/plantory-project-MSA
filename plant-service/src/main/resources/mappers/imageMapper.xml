@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zero.plantoryprojectbe.image.ImageMapper">
+<mapper namespace="org.zero.plantservice.ImageMapper">
 
     <!-- 공통 컬럼 -->
     <sql id="imageColumns">
@@ -27,7 +27,7 @@
 
 
     <!-- 단건 조회 -->
-    <select id="selectImageById" resultType="com.zero.plantoryprojectbe.image.dto.ImageDTO">
+    <select id="selectImageById" resultType="org.zero.plantservice.dto.ImageDTO">
         SELECT
         <include refid="imageColumns"/>
         FROM image
@@ -37,7 +37,7 @@
 
 
     <!-- 다건 조회 -->
-    <select id="selectImagesByTarget" resultType="com.zero.plantoryprojectbe.image.dto.ImageDTO">
+    <select id="selectImagesByTarget" resultType="org.zero.plantservice.dto.ImageDTO">
         SELECT
         <include refid="imageColumns"/>
         FROM image
@@ -49,7 +49,7 @@
 
 
     <!-- 이미지 INSERT (GCS 저장 후 DB 저장) -->
-    <insert id="insertImage" parameterType="com.zero.plantoryprojectbe.image.dto.ImageDTO">
+    <insert id="insertImage" parameterType="org.zero.plantservice.dto.ImageDTO">
         INSERT INTO image (
             member_id,
             target_type,
@@ -90,7 +90,7 @@
     </update>
 
     <insert id="insertProfileImage"
-            parameterType="com.zero.plantoryprojectbe.image.dto.ImageDTO"
+            parameterType="org.zero.plantservice.dto.ImageDTO"
             useGeneratedKeys="true"
             keyProperty="imageId">
         INSERT INTO image (
@@ -113,7 +113,7 @@
                )
     </insert>
 
-    <select id="selectLatestProfileImage" resultType="com.zero.plantoryprojectbe.image.dto.ImageDTO">
+    <select id="selectLatestProfileImage" resultType="org.zero.plantservice.dto.ImageDTO">
         SELECT
         <include refid="imageColumns"/>
         FROM image

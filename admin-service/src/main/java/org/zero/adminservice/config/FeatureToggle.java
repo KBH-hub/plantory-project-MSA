@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @RefreshScope
 @Component
 public class FeatureToggle {
-    @Value("${admin.property}")
+    @Value("${admin.property:OFF}")
     private String value;
 
     public String getValue() { return value; }

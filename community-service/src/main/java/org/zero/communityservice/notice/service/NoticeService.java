@@ -1,6 +1,7 @@
 package org.zero.communityservice.notice.service;
 
-import org.zero.plantoryprojectbe.notice.dto.NoticeDTO;
+
+import org.zero.communityservice.notice.dto.NoticeDTO;
 
 import java.util.List;
 
